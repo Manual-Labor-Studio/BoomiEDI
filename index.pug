@@ -1,0 +1,30 @@
+- var point_count = 7;
+- var circle_radius = 160;
+- var pi = 3.14159;
+- var n = 0;
+- var dash_array = pi * circle_radius * 2;
+
+.main
+
+	.navigation-circle
+
+		.navigation-circle__inner
+
+			svg.navigation-circle-svg.navigation-circle-svg--opaque(version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewbox=`0 0 ${circle_radius * 2} ${circle_radius * 2}` style=`enable-background:new 0 0 ${circle_radius * 2} ${circle_radius * 2}`)
+				circle(cx=`${circle_radius}` cy=`${circle_radius}` r=`${circle_radius - 2}` fill='none' stroke-width='1' stroke='#c644fc' stroke-linecap='round' stroke-miterlimit='10' style='stroke-dashoffset:0;stroke-dasharray:none;')
+
+			svg.navigation-circle-svg.navigation-circle-svg--mask(version='1.1' xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewbox=`0 0 ${circle_radius * 2} ${circle_radius * 2}` style=`enable-background:new 0 0 ${circle_radius * 2} ${circle_radius * 2}`)
+				circle(id='mask-circle' cx=`${circle_radius}` cy=`${circle_radius}` r=`${circle_radius - 2}` fill='none' stroke-width='2' stroke='#c644fc' stroke-linecap='round' stroke-miterlimit='10' style=`stroke-dasharray:${dash_array}px;`)
+				
+			ul.navigation-circle__list
+
+				while n < point_count
+					- n++
+
+					li.navigation-circle-list-item
+						a.navigation-circle-list-item__point(onclick=`onClick(${n})` onmouseenter=`calculateOffset(${n})` onMouseLeave='onMouseLeave()')
+							.navigation-circle-list-item__meta
+								h3.navigation-circle-list-item__title Item #
+									=n
+								h4.navigation-circle-list-item__subtitle It just goes round and round
+
