@@ -19,7 +19,7 @@ html, body {
 }
 
 
-.courier-text p {
+.courier-text p, .courier-text b {
     font-family: courier-std, monospace;
 }
 
@@ -55,11 +55,7 @@ p {
 }
 
 .mobile-header {
-    display: block;
-    position: absolute;
-    margin-left: 25px;
-    margin-top: 150px;
-    z-index: 9999;
+    padding-bottom: 12px;
 }
 
 .header {
@@ -348,8 +344,11 @@ p {
     cursor: pointer;
     font-weight: 700;
     border: 1px solid white;
-    padding: 5px 30px;
     transition: 0.5s;
+}
+
+.desktop_cta {
+    padding: 5px 30px;
 }
 
 #checks-boxes-button {
@@ -405,9 +404,9 @@ p {
 }
 
 .checked-boxes-list {
-    padding-top: 48px;
+    padding-top: 24px;
     list-style: none;
-    width: 90%;
+    width: 100%;
 }
 
 .checked-boxes-list li {
@@ -578,12 +577,12 @@ p {
 
 .mobile {
     display: block;
-    flex: 1;
+    width: 100%;
 }
 
 .flipster {
     position: relative;
-    padding-top: 200px;
+    padding-top: 150px;
     height: 100%;
 }
 
@@ -594,7 +593,6 @@ p {
 .flipster__container,
 .flipster__item {
     list-style-type: none;
-    position: relative;
     height: 100%;
 }
 
@@ -619,7 +617,7 @@ p {
 }
 
 .flipster__item h2 {
-    margin-bottom: 48px;
+    margin-bottom: 24px;
 }
   
 .flipster--infinite-carousel .flipster__container, .flipster--infinite-carousel .flipster__item {
@@ -688,10 +686,10 @@ p {
 }
 
 .carousel_indicators {
-    width: 300px;
+    width: 275px;
     position: absolute;
     left: 50%;
-    top: 88%;
+    top: 89%;
     transform: translate(-50%, 0);
     z-index: 1000;
 }
@@ -712,10 +710,10 @@ p {
 }
 
 .flipster__button--prev {
-    left: 10px;
+    left: 5px;
 }
 .flipster__button--next {
-    right: 10px;
+    right: 5px;
 }
 
 #mobile-swipe-text {
@@ -729,6 +727,19 @@ p {
     h2 {
         font-size: 40px;
     }
+
+    .carousel_indicators {
+        width: 350px;
+        top: 88%;
+    }
+
+    .flipster__button--prev {
+        left: 5px;
+    }
+
+    .flipster__button--next {
+        right: 5px;
+    }
 }
 
 @media screen and (min-width: 769px) {
@@ -738,10 +749,6 @@ p {
 
     .flipster__item {
         margin: 0 150px;
-    }
-
-    .mobile-header {
-        margin-left: 150px;
     }
 
     .flipster__button--prev {
@@ -777,10 +784,6 @@ p {
 
     p {
         font-size: 21px;
-    }
-
-    .mobile-header {
-        display: none;
     }
 
     .header {
