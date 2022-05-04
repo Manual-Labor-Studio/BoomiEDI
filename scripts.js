@@ -425,22 +425,10 @@ function newPanel() {
                 _items.css('transition', '');
             }
 
-            function calculateBiggestItemHeight() {
-                var biggestHeight = 0,
-                    itemHeight;
-
-                _items.each(function() {
-                    itemHeight = $(this).height();
-                    if ( itemHeight > biggestHeight ) { biggestHeight = itemHeight; }
-                });
-                return biggestHeight;
-            }
-
             function resize(skipTransition) {
                 if ( skipTransition ) { noTransition(); }
 
                 _containerWidth = _container.width();
-                _container.height(calculateBiggestItemHeight());
 
                 _items.each(function(i) {
                     var item = $(this),
@@ -539,8 +527,15 @@ function newPanel() {
                     _currentIndex = _items.index(to);
                 }
 
+				if( _currentIndex==7) {
+					var mainbg = document.querySelector(".main");
+					mainbg.style.background = "linear-gradient(0deg, #ff7c66,#ff7c66);";
+				}
+
                 circle_fill(_currentIndex, _previous); 
                 _currentItem = _items.eq(_currentIndex);
+
+				mobile_header_text(_currentIndex)
 
                 if ( _currentIndex !== _previous && settings.onItemSwitch ) {
                     settings.onItemSwitch.call(self, _items[_currentIndex], _items[_previous]);
@@ -550,6 +545,17 @@ function newPanel() {
 
                 return self;
             }
+
+			function mobile_header_text(current_idx) {
+				var mobile_header = document.querySelector(".mobile-header p");
+				var mobile_header_captions = ["GO CLOUD-NATIVE","DEPLOY ”HUMAN READABLE” EDI DASHBOARDS","AVOID THE EDI SILO","STOP ONBOARDING YOUR PARTNERS","FUTURE PROOF YOUR B2B/EDI"];
+				if(current_idx>0 && current_idx<6) {
+					mobile_header.innerHTML = mobile_header_captions[current_idx-1];
+				}
+				else {
+					mobile_header.innerHTML = "";
+				}
+			}
 
             function play(interval) {
                 console.log(interval);
@@ -763,14 +769,7 @@ function newPanel() {
 
                 var style;
 
-                self.css('visibility', 'hidden');
-
                 index();
-
-                if ( _items.length <= 1 ) {
-                    self.css('visibility', '');
-                    return;
-                }
 
                 style = (settings.style ? 'flipster--' + settings.style.split(' ').join(' flipster--') : false);
 
