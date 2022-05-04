@@ -54,6 +54,14 @@ p {
     transform: scale(1.5);
 }
 
+.mobile-header {
+    display: block;
+    position: absolute;
+    margin-left: 25px;
+    margin-top: 150px;
+    z-index: 9999;
+}
+
 .header {
     display: none;
     position: absolute;
@@ -363,9 +371,18 @@ p {
     top: 30%;
 }
 
+
 .background-planet-container {
     z-index: -1;
     position: relative;
+}
+
+.background-planet-mobile {
+    z-index: inherit;
+    position: absolute;
+    width: 100%;
+    margin-top: -80px;
+    opacity: 0.5;
 }
 
 #background-planet {
@@ -578,6 +595,7 @@ p {
 .flipster__item {
     list-style-type: none;
     position: relative;
+    height: 100%;
 }
 
 .flipster__container {
@@ -675,6 +693,7 @@ p {
     left: 50%;
     top: 88%;
     transform: translate(-50%, 0);
+    z-index: 1000;
 }
 
 .carousel_nav_circle {
@@ -721,6 +740,10 @@ p {
         margin: 0 150px;
     }
 
+    .mobile-header {
+        margin-left: 150px;
+    }
+
     .flipster__button--prev {
         left: 15%;
     }
@@ -754,6 +777,10 @@ p {
 
     p {
         font-size: 21px;
+    }
+
+    .mobile-header {
+        display: none;
     }
 
     .header {
