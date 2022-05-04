@@ -535,8 +535,6 @@ function newPanel() {
                 circle_fill(_currentIndex, _previous); 
                 _currentItem = _items.eq(_currentIndex);
 
-				mobile_header_text(_currentIndex)
-
                 if ( _currentIndex !== _previous && settings.onItemSwitch ) {
                     settings.onItemSwitch.call(self, _items[_currentIndex], _items[_previous]);
                 }
@@ -545,17 +543,6 @@ function newPanel() {
 
                 return self;
             }
-
-			function mobile_header_text(current_idx) {
-				var mobile_header = document.querySelector(".mobile-header p");
-				var mobile_header_captions = ["GO CLOUD-NATIVE","DEPLOY ”HUMAN READABLE” EDI DASHBOARDS","AVOID THE EDI SILO","STOP ONBOARDING YOUR PARTNERS","FUTURE PROOF YOUR B2B/EDI"];
-				if(current_idx>0 && current_idx<6) {
-					mobile_header.innerHTML = mobile_header_captions[current_idx-1];
-				}
-				else {
-					mobile_header.innerHTML = "";
-				}
-			}
 
             function play(interval) {
                 console.log(interval);
