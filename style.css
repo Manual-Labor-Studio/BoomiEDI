@@ -42,6 +42,7 @@ p {
 }
 
 .stars-video-container {
+    display: none;
     flex: 0;
     position: relative;
     width: 100%;
@@ -279,16 +280,31 @@ p {
     width: 75px;
     top: 0;
     color: #ff7c66;
-    font-size: 12px;
     font-weight: 400;
     line-height: 32px;
     text-align: center;
-    border: 2px solid rgba(255,255,255, 0.5);
-    border-radius: 50%;
     transform: scale(0.75);
     transition: all .5s ease;
+    font-size: 12px;
+}
+
+.navigation-circle-list-item__point.blueplanet:before {
     background-image: url("blueplanet.png");
     background-size: cover;
+    border: 2px solid rgba(255,255,255, 0.5);
+    border-radius: 50%;
+}
+
+.navigation-circle-list-item:hover .navigation-circle-list-item__point:before  {
+    transform: scale(1);
+    font-size: 16px
+}
+
+.redplanet {
+    transform: scale(0.85);
+    background-image: url("planet.png");
+    background-size: cover;
+    border: none;
 }
 
 .navigation-circle-list-item__point:after {
@@ -341,6 +357,8 @@ p {
 }
 
 .cta {
+    display: block;
+    text-align: center;
     cursor: pointer;
     font-weight: 700;
     border: 1px solid white;
@@ -354,6 +372,8 @@ p {
 #checks-boxes-button {
     background-color: #ff7c66;
     color: #02293b;
+    width: 166px;
+    margin: auto;
 }
 
 #checks-boxes-button:hover {
@@ -417,8 +437,7 @@ p {
     content: "\2022";  
     color: white;
     display: inline-block; 
-    width: 1em; /* Also needed for space (tweak if needed) */
-    margin-left: -1em; /* Also needed for space (tweak if needed) */
+    width: 1em;
 }
 
 .view-report-cta {
@@ -441,6 +460,8 @@ p {
     text-decoration: none;
     color: white;
     margin-left: 0px;
+    padding: 10px 0;
+    width: 100%;
 }
 
 #view-report-cta-button:hover {
@@ -492,21 +513,10 @@ p {
     animation: 1s cubic-bezier(0.55, -0.3, 0.6, 1.5) 0.6s 1 animate-in-list-item-point forwards
 }
 
-.navigation-circle-list-item:hover .navigation-circle-list-item__point:before {
-    transform: scale(1);
-    font-size: 16px
-}
 
 .navigation-circle-list-item:hover .navigation-circle-list-item__point:after {
     width: 32px;
     left: 34px
-}
-
-.navigation-circle-list-item:active .navigation-circle-list-item__point:before, .navigation-circle-list-item.active .navigation-circle-list-item__point:before {
-    transform: scale(0.85);
-    background-image: url("planet.png");
-    background-size: cover;
-    border: none;
 }
 
 .navigation-circle-list-item:active .navigation-circle-list-item__point:after, .navigation-circle-list-item.active .navigation-circle-list-item__point:after {
@@ -671,7 +681,7 @@ p {
     transition: opacity 500ms ease;
     margin: -1em 2em;
     font-size: 10px;
-    top: 90%;
+    top: 86%;
 }
 
 .flipster__button svg {
@@ -689,7 +699,7 @@ p {
     width: 275px;
     position: absolute;
     left: 50%;
-    top: 89%;
+    top: 85%;
     transform: translate(-50%, 0);
     z-index: 1000;
 }
@@ -718,9 +728,10 @@ p {
 
 #mobile-swipe-text {
     position: absolute;
-    bottom: 12px;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, 0);
+    z-index: 9999;
 }
 
 @media screen and (min-width: 481px) {
@@ -733,6 +744,14 @@ p {
         top: 88%;
     }
 
+    #mobile-swipe-text {
+        top: 95%
+    }
+
+    .flipster__button {
+        top: 90%;
+    }
+
     .flipster__button--prev {
         left: 5px;
     }
@@ -740,6 +759,11 @@ p {
     .flipster__button--next {
         right: 5px;
     }
+
+    #view-report-cta-button {
+        width: 200px;
+    }
+
 }
 
 @media screen and (min-width: 769px) {
@@ -763,6 +787,10 @@ p {
         width: 400px;
     }
 
+    .stars-video-container {
+        display: block;
+    }
+
 }
 
 @media screen and (min-width: 1024px) {
@@ -774,16 +802,8 @@ p {
         display: block;
     }
 
-    h2 {
-        font-size: 48px;
-    }
-
     h3 {
         font-size: 34px;
-    }
-
-    p {
-        font-size: 21px;
     }
 
     .header {
@@ -824,6 +844,19 @@ p {
     }
 
     #view-report-cta-button {
-        margin-left: 50px;
+        right: 10%;
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    h2 {
+        font-size: 48px;
+    }
+
+    p {
+        font-size: 21px;
     }
 }
