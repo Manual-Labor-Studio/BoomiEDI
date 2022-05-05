@@ -56,14 +56,20 @@ const onClick = (index) => {
 	calculateOffset(index);
 	selectedItemIndex = index;
 	prev = index;
-	setTimeout(function(){calculateOffset(1)}, 1000);
+	//setTimeout(function(){calculateOffset(1)}, 1000);
 	displayTitle();
 	
 	//Find active item, deselect
 	let activeListItem = document.querySelectorAll('.navigation-circle-list-item.active');
+	let activePoint = document.querySelectorAll('.navigation-circle-list-item__point')[index-1];
 	let listItem = document.querySelectorAll('.navigation-circle-list-item:nth-of-type(' + selectedItemIndex + ')');
 	let activeContentItem = document.querySelectorAll('.content-text-list .active-text');
 	let contentItem = document.querySelectorAll('.content-text-list li');
+	if(activePoint.classList.contains("blueplanet")) {
+		activePoint.classList.remove("blueplanet");
+		activePoint.classList.add("redplanet");
+		//activePoint.classList.add("redplanet");
+	}
 	if (activeListItem.length > 0) {
 		activeListItem[0].classList.remove('active');
 	}
@@ -425,7 +431,7 @@ function newPanel() {
                 _items.css('transition', '');
             }
 
-            function resize(skipTransition) {
+            /*function resize(skipTransition) {
                 if ( skipTransition ) { noTransition(); }
 
                 _containerWidth = _container.width();
@@ -453,7 +459,7 @@ function newPanel() {
                         if ( skipTransition ) { setTimeout(resetTransition, 1); }
                     }
                 });
-            }
+            }*/
 
             function center() {
                 var total = _items.length,
@@ -498,7 +504,7 @@ function newPanel() {
                             });
                     });
 
-                    if ( !_containerWidth || _itemOffsets[_currentIndex] === undefined ) { resize(true); }
+                    //if ( !_containerWidth || _itemOffsets[_currentIndex] === undefined ) { resize(true); }
                 }
 
                 updateNav();
@@ -567,7 +573,7 @@ function newPanel() {
             }
 
             function show() {
-                resize(true);
+                //(true);
                 self.hide()
                     .css('visibility', '')
                     .addClass(classes.active)
@@ -720,8 +726,8 @@ function newPanel() {
                 if(current_idx!=prev_idx) {
                     circles[current_idx].classList.remove("circle" + current_idx.toString() +"_nofill");
                     circles[current_idx].classList.add("circle" + current_idx.toString() +"_fill");
-                    circles[prev_idx].classList.add("circle" + prev_idx.toString() +"_nofill");
-                    circles[prev_idx].classList.remove("circle" + prev_idx.toString() +"_fill");
+                    //circles[prev_idx].classList.add("circle" + prev_idx.toString() +"_nofill");
+                    //circles[prev_idx].classList.remove("circle" + prev_idx.toString() +"_fill");
 					if(current_idx>0 && current_idx<6) {
 						circles[current_idx].classList.add("line_fill");
 						circles[current_idx].classList.remove("line_nofill");
@@ -793,7 +799,7 @@ function newPanel() {
                 }
 
                 // Attach event bindings.
-                $window.on('resize.flipster', throttle(resize, 400));
+               // $window.on('resize.flipster', throttle(resize, 400));
 
                 if ( settings.autoplay ) { play(); }
 
@@ -822,7 +828,7 @@ function newPanel() {
             self.data('methods', methods);
 
             // Initialize if flipster is not already active.
-            if ( !self.hasClass(classes.active) ) { init(); }
+            if ( !self.hasClass(classes.active)) { init(); }
         });
     };
 })(jQuery, window);
