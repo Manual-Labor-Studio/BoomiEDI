@@ -95,7 +95,7 @@ p {
     display: flex;
     height: 100vh;
     width: 100vw;
-    background-image: url("BoomiBackground.png");   
+    background-image: url("https://ml.manual-labor-client.com/wp-content/uploads/2022/05/BoomiBackground.png");   
     background-size: cover;
     overflow: hidden;
 }
@@ -289,7 +289,7 @@ p {
 }
 
 .navigation-circle-list-item__point.blueplanet:before {
-    background-image: url("blueplanet.png");
+    background-image: url("https://ml.manual-labor-client.com/wp-content/uploads/2022/05/blueplanet.png");
     background-size: cover;
     border: 2px solid rgba(255,255,255, 0.5);
     border-radius: 50%;
@@ -300,9 +300,8 @@ p {
     font-size: 16px
 }
 
-.redplanet {
-    transform: scale(0.85);
-    background-image: url("planet.png");
+.navigation-circle-list-item__point.redplanet {
+    background-image: url("https://ml.manual-labor-client.com/wp-content/uploads/2022/05/planet.png");
     background-size: cover;
     border: none;
 }
@@ -314,6 +313,7 @@ p {
     width: 0px;
     top: 18px;
     left: 31px;
+    transform: scale(0.75);
     transition: all .5s ease;
 }
 
@@ -681,7 +681,7 @@ p {
     transition: opacity 500ms ease;
     margin: -1em 2em;
     font-size: 10px;
-    top: 86%;
+    top: 84%;
 }
 
 .flipster__button svg {
@@ -699,7 +699,7 @@ p {
     width: 275px;
     position: absolute;
     left: 50%;
-    top: 85%;
+    top: 83%;
     transform: translate(-50%, 0);
     z-index: 1000;
 }
@@ -728,7 +728,7 @@ p {
 
 #mobile-swipe-text {
     position: absolute;
-    top: 90%;
+    top: 88%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 9999;
