@@ -65,7 +65,9 @@ const onClick = (index) => {
 	let listItem = document.querySelectorAll('.navigation-circle-list-item:nth-of-type(' + selectedItemIndex + ')');
 	let activeContentItem = document.querySelectorAll('.content-text-list .active-text');
 	let contentItem = document.querySelectorAll('.content-text-list li');
+    let outerCaptions = document.querySelectorAll('.navigation-circle-list-item__meta');
 	if(activePoint.classList.contains("blueplanet")) {
+        outerCaptions[index-1].style.opacity = "1";
 		activePoint.classList.remove("blueplanet");
 		activePoint.classList.add("redplanet");
 		//activePoint.classList.add("redplanet");
@@ -119,6 +121,23 @@ function newPanel() {
 
 (function($, window, undefined) {
     'use strict';
+    window.onresize = function(){
+        if(window.innerWidth >= 1024) {
+            redbg(false);
+        }
+        else if(document.querySelectorAll(".flip-item")[7].classList.contains("flipster__item--current")){
+            redbg(true);
+        }
+    };
+    
+    function redbg(changebg) {
+        if(changebg) {
+            document.querySelector(".main-container").classList.add("mobile_redbg");
+        }
+        else {
+            document.querySelector(".main-container").classList.remove("mobile_redbg");
+        }
+    }
 
     function throttle(func, delay) {
         var timer = null;
@@ -513,8 +532,6 @@ function newPanel() {
             function jump(to) {
                 var _previous = _currentIndex;
 
-                
-
                 if ( _items.length <= 1 ) { return; }
 
                 if ( to === 'prev' ) {
@@ -532,11 +549,12 @@ function newPanel() {
                     // if object is sent, get its index
                     _currentIndex = _items.index(to);
                 }
-
 				if( _currentIndex==7) {
-					var mainbg = document.querySelector(".main");
-					mainbg.style.background = "linear-gradient(0deg, #ff7c66,#ff7c66);";
+                    redbg(true);
 				}
+                else {
+                    redbg(false);
+                }
 
                 circle_fill(_currentIndex, _previous); 
                 _currentItem = _items.eq(_currentIndex);
@@ -683,6 +701,7 @@ function newPanel() {
             }
 
             function touchEvents(elem) {
+
                 if ( settings.touch ) {
                     var _startDragY = false,
                         _touchJump = throttle(jump, 300),
@@ -718,6 +737,7 @@ function newPanel() {
                     });
                 }
             }
+            
 
             var circles = Array.prototype.slice.call(document.querySelectorAll(".carousel_nav_circle"));
 			var lines = Array.prototype.slice.call(document.querySelectorAll(".carousel_indicators line"));
