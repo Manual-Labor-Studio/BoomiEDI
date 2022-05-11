@@ -11,6 +11,11 @@ html, body {
     width: 100vw;
     overflow-x: hidden;
     background-color: #02293b;
+    margin: 0;
+}
+
+.fixed-top, #wpadminbar {
+    display: none;
 }
 
 .courier_text p, .courier_text b {
@@ -742,7 +747,7 @@ html, body {
     transition: opacity 500ms ease;
     margin: -1em 2em;
     font-size: 10px;
-    top: 84%;
+    top: 81%;
 }
 
 .flipster__button svg {
@@ -760,7 +765,7 @@ html, body {
     width: 275px;
     position: absolute;
     left: 50%;
-    top: 83%;
+    top: 80%;
     transform: translate(-50%, 0);
     z-index: 1000;
 }
@@ -789,7 +794,7 @@ html, body {
 
 #mobile-swipe-text {
     position: absolute;
-    top: 88%;
+    top: 85%;
     left: 50%;
     transform: translate(-50%, 0);
     z-index: 9999;
@@ -929,6 +934,10 @@ html, body {
 
     .edi p {
         font-size: 21px;
+    }
+
+    .view-report-cta p {
+        font-size: 18px;
     }
 
     .navigation-circle {
