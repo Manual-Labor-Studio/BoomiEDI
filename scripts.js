@@ -9,111 +9,114 @@ var selectedItemIndex = -1;
 var firstClick = false;
 
 
+window.addEventListener('load', (event) => {
+    $(".mobile").css("opacity", "1");
+    $(".preloader").delay(2000).fadeOut("slow");
+    $("#overlayer").delay(2000).fadeOut("slow");
+});
+
 function displayTitle() {
-	if(firstClick == false) {
-		firstClick = true;
-		var title = document.getElementById("title");
-		title.classList.add("active-title");
-		var startHere = document.getElementById("start-here");
-		startHere.style.visibility = "hidden";
-		setTimeout(function(){
-			var checksBoxes = document.getElementById("checks-boxes");
-			checksBoxes.style.visibility = "visible";
-			checksBoxes.style.transform = "translate(0,0)";
-		}, 2000);
-	}
+    if (firstClick == false) {
+        firstClick = true;
+        var title = document.getElementById("title");
+        title.classList.add("active-title");
+        var startHere = document.getElementById("start-here");
+        startHere.style.visibility = "hidden";
+        setTimeout(function() {
+            var checksBoxes = document.getElementById("checks-boxes");
+            checksBoxes.style.visibility = "visible";
+            checksBoxes.style.transform = "translate(0,0)";
+        }, 2000);
+    }
 }
 
 const onLeave = (index) => {
-	if(prev != index) {
-		let activeCaption = document.querySelectorAll('.navigation-circle-captions li.active-caption');
-		//Find new item by index, select
-		let caption = document.querySelectorAll('.navigation-circle-captions li');
-		activeCaption[0].classList.remove('active-caption');
-		if(prev == -1) {
-			caption[0].classList.add('active-caption');
-		}
-		else {
-			caption[prev].classList.add('active-caption');
-		}
-	}
+    if (prev != index) {
+        let activeCaption = document.querySelectorAll('.navigation-circle-captions li.active-caption');
+        //Find new item by index, select
+        let caption = document.querySelectorAll('.navigation-circle-captions li');
+        activeCaption[0].classList.remove('active-caption');
+        if (prev == -1) {
+            caption[0].classList.add('active-caption');
+        } else {
+            caption[prev].classList.add('active-caption');
+        }
+    }
 }
 
 const onHover = (index) => {
-	//If already selected, deselect
-	selectedItemIndex = index;
-	
-	//Find active item, deselect
-	let activeCaption = document.querySelectorAll('.navigation-circle-captions li.active-caption');
-	//Find new item by index, select
-	let caption = document.querySelectorAll('.navigation-circle-captions li');
+    //If already selected, deselect
+    selectedItemIndex = index;
 
-	activeCaption[0].classList.remove('active-caption');
-	caption[index].classList.add('active-caption');
+    //Find active item, deselect
+    let activeCaption = document.querySelectorAll('.navigation-circle-captions li.active-caption');
+    //Find new item by index, select
+    let caption = document.querySelectorAll('.navigation-circle-captions li');
+
+    activeCaption[0].classList.remove('active-caption');
+    caption[index].classList.add('active-caption');
 };
 
 const onClick = (index) => {
-	calculateOffset(index);
-	selectedItemIndex = index;
-	prev = index;
-	//setTimeout(function(){calculateOffset(1)}, 1000);
-	displayTitle();
-	
-	//Find active item, deselect
-	let activeListItem = document.querySelectorAll('.navigation-circle-list-item.active');
-	let activePoint = document.querySelectorAll('.navigation-circle-list-item__point')[index-1];
-	let listItem = document.querySelectorAll('.navigation-circle-list-item:nth-of-type(' + selectedItemIndex + ')');
-	let activeContentItem = document.querySelectorAll('.content-text-list .active-text');
-	let contentItem = document.querySelectorAll('.content-text-list li');
+    calculateOffset(index);
+    selectedItemIndex = index;
+    prev = index;
+    //setTimeout(function(){calculateOffset(1)}, 1000);
+    displayTitle();
+
+    //Find active item, deselect
+    let activeListItem = document.querySelectorAll('.navigation-circle-list-item.active');
+    let activePoint = document.querySelectorAll('.navigation-circle-list-item__point')[index - 1];
+    let listItem = document.querySelectorAll('.navigation-circle-list-item:nth-of-type(' + selectedItemIndex + ')');
+    let activeContentItem = document.querySelectorAll('.content-text-list .active-text');
+    let contentItem = document.querySelectorAll('.content-text-list li');
     let outerCaptions = document.querySelectorAll('.navigation-circle-list-item__meta');
-	if(activePoint.classList.contains("blueplanet")) {
-        outerCaptions[index-1].style.opacity = "1";
-		activePoint.classList.remove("blueplanet");
-		activePoint.classList.add("redplanet");
-		//activePoint.classList.add("redplanet");
-	}
-	if (activeListItem.length > 0) {
-		activeListItem[0].classList.remove('active');
-	}
-	activeContentItem[0].classList.remove('active-text');
-	if (listItem.length > 0) {
-		listItem[0].classList.add('active');
-		contentItem[selectedItemIndex].classList.add('active-text');
-	}
+    if (activePoint.classList.contains("blueplanet")) {
+        outerCaptions[index - 1].style.opacity = "1";
+        activePoint.classList.remove("blueplanet");
+        activePoint.classList.add("redplanet");
+        //activePoint.classList.add("redplanet");
+    }
+    if (activeListItem.length > 0) {
+        activeListItem[0].classList.remove('active');
+    }
+    activeContentItem[0].classList.remove('active-text');
+    if (listItem.length > 0) {
+        listItem[0].classList.add('active');
+        contentItem[selectedItemIndex].classList.add('active-text');
+    }
 };
 
 /**
  * @description - Calculate offset for circle path by index of list item
  * @param {Number} index - Index of list item
  */
-const calculateOffset = (index=0) => {
-	index = index -1;
-	let offset = 0;
-	if (index !== 0) {
-		offset = (circumference / pointCount) * (pointCount - index);
-		circlePath.style.strokeDashoffset = `${offset}px`;
-	}
-	
-	else {
-		circlePath.style.strokeDashoffset = `1006px`;
-	}
+const calculateOffset = (index = 0) => {
+    index = index - 1;
+    let offset = 0;
+    if (index !== 0) {
+        offset = (circumference / pointCount) * (pointCount - index);
+        circlePath.style.strokeDashoffset = `${offset}px`;
+    } else {
+        circlePath.style.strokeDashoffset = `1006px`;
+    }
 };
 
 function newPanel() {
-	var panelText = document.getElementById("panel-text");
-	var boxesList = document.getElementById("checked-boxes-list-container");
-	var homeText = document.getElementById("home-text");
-	var circleContainer = document.getElementById("circle-container");
-	panelText.style.display = "block";
-	boxesList.style.display = "block";
-	homeText.style.display = "none";
-	circleContainer.style.display = "none";
-	setTimeout(function() {
-		var backgroundPlanet = document.getElementById("background-planet");
-		backgroundPlanet.style.opacity = "1";
-		backgroundPlanet.classList.add("background-planet__animate");
-	},1000);
-	displayTitle();
+    var panelText = document.getElementById("panel-text");
+    var boxesList = document.getElementById("checked-boxes-list-container");
+    var homeText = document.getElementById("home-text");
+    var circleContainer = document.getElementById("circle-container");
+    panelText.style.display = "block";
+    boxesList.style.display = "block";
+    homeText.style.display = "none";
+    circleContainer.style.display = "none";
+    setTimeout(function() {
+        var backgroundPlanet = document.getElementById("background-planet");
+        backgroundPlanet.style.opacity = "1";
+        backgroundPlanet.classList.add("background-planet__animate");
+    }, 1000);
+    displayTitle();
 }
 
 /* jshint browser: true, jquery: true, devel: true */
@@ -121,20 +124,18 @@ function newPanel() {
 
 (function($, window, undefined) {
     'use strict';
-    window.onresize = function(){
-        if(window.innerWidth >= 1024) {
+    window.onresize = function() {
+        if (window.innerWidth >= 1024) {
             redbg(false);
-        }
-        else if(document.querySelectorAll(".flip-item")[7].classList.contains("flipster__item--current")){
+        } else if (document.querySelectorAll(".flip-item")[7].classList.contains("flipster__item--current")) {
             redbg(true);
         }
     };
-    
+
     function redbg(changebg) {
-        if(changebg) {
+        if (changebg) {
             document.querySelector(".main-container").classList.add("mobile_redbg");
-        }
-        else {
+        } else {
             document.querySelector(".main-container").classList.remove("mobile_redbg");
         }
     }
@@ -146,7 +147,7 @@ function newPanel() {
             var context = this,
                 args = arguments;
 
-            if ( timer === null ) {
+            if (timer === null) {
                 timer = setTimeout(function() {
                     func.apply(context, args);
                     timer = null;
@@ -159,7 +160,9 @@ function newPanel() {
     var checkStyleSupport = (function() {
         var support = {};
         return function(prop) {
-            if ( support[prop] !== undefined ) { return support[prop]; }
+            if (support[prop] !== undefined) {
+                return support[prop];
+            }
 
             var div = document.createElement('div'),
                 style = div.style,
@@ -168,7 +171,9 @@ function newPanel() {
                 props = (prop + ' ' + (prefixes).join(ucProp + ' ') + ucProp).split(' ');
 
             for (var i in props) {
-                if ( props[i] in style ) { return support[prop] = props[i]; }
+                if (props[i] in style) {
+                    return support[prop] = props[i];
+                }
             }
 
             return support[prop] = false;
@@ -179,10 +184,12 @@ function newPanel() {
         svgSupport = (function() {
             var support;
             return function() {
-                if ( support !== undefined ) { return support; }
+                if (support !== undefined) {
+                    return support;
+                }
                 var div = document.createElement('div');
                 div.innerHTML = '<svg/>';
-                support = ( div.firstChild && div.firstChild.namespaceURI === svgNS );
+                support = (div.firstChild && div.firstChild.namespaceURI === svgNS);
                 return support;
             };
         }());
@@ -300,11 +307,11 @@ function newPanel() {
     $.fn.flipster = function(options) {
         var isMethodCall = (typeof options === 'string' ? true : false);
 
-        if ( isMethodCall ) {
+        if (isMethodCall) {
             var args = Array.prototype.slice.call(arguments, 1);
             return this.each(function() {
                 var methods = $(this).data('methods');
-                if ( methods[options] ) {
+                if (methods[options]) {
                     return methods[options].apply(this, args);
                 } else {
                     return this;
@@ -335,17 +342,19 @@ function newPanel() {
                 _startDrag = false;
 
             function buildButtonContent(dir) {
-                var text = ( dir === 'next' ? settings.buttonNext : settings.buttonPrev );
+                var text = (dir === 'next' ? settings.buttonNext : settings.buttonPrev);
 
-                if ( settings.buttons === 'custom' || !svgSupport ) { return text; }
+                if (settings.buttons === 'custom' || !svgSupport) {
+                    return text;
+                }
 
                 return '<svg viewBox="0 0 13 20" xmlns="' + svgNS + '" aria-labelledby="title"><title>' + text + '</title><polyline points="10,3 3,10 10,17"' + (dir === 'next' ? ' transform="rotate(180 6.5,10)"' : '') + '/></svg>';
             }
 
             function buildButton(dir) {
                 dir = dir || 'next';
-                var clicked_button = $('<button class="' + classes.button + ' ' + ( dir === 'next' ? classes.buttonNext : classes.buttonPrev ) + '" role="button" />');
-                return $('<button class="' + classes.button + ' ' + ( dir === 'next' ? classes.buttonNext : classes.buttonPrev ) + '" role="button" />')
+                var clicked_button = $('<button class="' + classes.button + ' ' + (dir === 'next' ? classes.buttonNext : classes.buttonPrev) + '" role="button" />');
+                return $('<button class="' + classes.button + ' ' + (dir === 'next' ? classes.buttonNext : classes.buttonPrev) + '" role="button" />')
                     .html(buildButtonContent(dir))
                     .on('click', function(e) {
                         jump(dir);
@@ -355,7 +364,7 @@ function newPanel() {
             }
 
             function buildButtons() {
-                if ( settings.buttons && _items.length > 1 ) {
+                if (settings.buttons && _items.length > 1) {
                     self.find('.' + classes.button).remove();
                     self.append(buildButton('prev'), buildButton('next'));
                 }
@@ -364,9 +373,13 @@ function newPanel() {
             function buildNav() {
                 var navCategories = {};
 
-                if ( !settings.nav || _items.length <= 1 ) { return; }
+                if (!settings.nav || _items.length <= 1) {
+                    return;
+                }
 
-                if ( _nav ) { _nav.remove(); }
+                if (_nav) {
+                    _nav.remove();
+                }
 
                 _nav = $('<ul class="' + classes.nav + '" role="navigation" />');
                 _navLinks = $('');
@@ -380,14 +393,14 @@ function newPanel() {
 
                     _navLinks = _navLinks.add(navLink);
 
-                    if ( category ) {
+                    if (category) {
 
-                        if ( !navCategories[category] ) {
+                        if (!navCategories[category]) {
 
                             var categoryItem = $('<li class="' + classes.navItem + ' ' + classes.navCategory + '">');
                             var categoryLink = $('<a href="#" class="' + classes.navLink + ' ' + classes.navCategoryLink + '" data-flip-category="' + category + '">' + category + '</a>')
-                                    .data('category', category)
-                                    .data('index', i);
+                                .data('category', category)
+                                .data('index', i);
 
                             navCategories[category] = $('<ul class="' + classes.navChild + '" />');
 
@@ -409,20 +422,23 @@ function newPanel() {
 
                 _nav.on('click', 'a', function(e) {
                     var index = $(this).data('index');
-                    if ( index >= 0 ) {
+                    if (index >= 0) {
                         jump(index);
                         e.preventDefault();
                     }
                 });
 
-                if ( settings.nav === 'after' ) { self.append(_nav); }
-                else { self.prepend(_nav); }
+                if (settings.nav === 'after') {
+                    self.append(_nav);
+                } else {
+                    self.prepend(_nav);
+                }
 
                 _navItems = _nav.find('.' + classes.navItem);
             }
 
             function updateNav() {
-                if ( settings.nav ) {
+                if (settings.nav) {
 
                     var category = _currentItem.data('flip-category');
 
@@ -482,27 +498,27 @@ function newPanel() {
 
             function center() {
                 var total = _items.length,
-                    loopCount = ( settings.loop !== true && settings.loop > 0 ? settings.loop : false ),
+                    loopCount = (settings.loop !== true && settings.loop > 0 ? settings.loop : false),
                     item, newClass, zIndex, past, offset;
 
-                if ( _currentIndex >= 0 ) {
+                if (_currentIndex >= 0) {
 
                     _items.each(function(i) {
                         item = $(this);
                         newClass = ' ';
 
-                        if ( i === _currentIndex ) {
+                        if (i === _currentIndex) {
                             newClass += classes.itemCurrent;
                             zIndex = (total + 2);
                         } else {
-                            past = ( i < _currentIndex ? true : false );
-                            offset = ( past ? _currentIndex - i : i - _currentIndex );
+                            past = (i < _currentIndex ? true : false);
+                            offset = (past ? _currentIndex - i : i - _currentIndex);
 
-                            if ( loopCount ) {
-                                if ( _currentIndex <= loopCount && i > _currentIndex + loopCount ) {
+                            if (loopCount) {
+                                if (_currentIndex <= loopCount && i > _currentIndex + loopCount) {
                                     past = true;
                                     offset = (total + _currentIndex) - i;
-                                } else if ( _currentIndex >= total - loopCount && i < _currentIndex - loopCount ) {
+                                } else if (_currentIndex >= total - loopCount && i < _currentIndex - loopCount) {
                                     past = false;
                                     offset = (total - _currentIndex) + i;
                                 }
@@ -532,34 +548,38 @@ function newPanel() {
             function jump(to) {
                 var _previous = _currentIndex;
 
-                if ( _items.length <= 1 ) { return; }
+                if (_items.length <= 1) {
+                    return;
+                }
 
-                if ( to === 'prev' ) {
-                    if ( _currentIndex > 0 ) { 
+                if (to === 'prev') {
+                    if (_currentIndex > 0) {
                         _currentIndex--;
+                    } else if (settings.loop) {
+                        _currentIndex = _items.length - 1;
                     }
-                    else if ( settings.loop ) { 
-                        _currentIndex = _items.length - 1; 
+                } else if (to === 'next') {
+                    if (_currentIndex < _items.length - 1) {
+                        _currentIndex++;
+                    } else if (settings.loop) {
+                        _currentIndex = 0;
                     }
-                } else if ( to === 'next' ) {
-                    if ( _currentIndex < _items.length - 1 ) { _currentIndex++; }
-                    else if ( settings.loop ) { _currentIndex = 0; }
-                } else if ( typeof to === 'number' ) { _currentIndex = to;
-                } else if ( to !== undefined ) {
+                } else if (typeof to === 'number') {
+                    _currentIndex = to;
+                } else if (to !== undefined) {
                     // if object is sent, get its index
                     _currentIndex = _items.index(to);
                 }
-				if( _currentIndex==7) {
+                if (_currentIndex == 7) {
                     redbg(true);
-				}
-                else {
+                } else {
                     redbg(false);
                 }
 
-                circle_fill(_currentIndex, _previous); 
+                circle_fill(_currentIndex, _previous);
                 _currentItem = _items.eq(_currentIndex);
 
-                if ( _currentIndex !== _previous && settings.onItemSwitch ) {
+                if (_currentIndex !== _previous && settings.onItemSwitch) {
                     settings.onItemSwitch.call(self, _items[_currentIndex], _items[_previous]);
                 }
 
@@ -577,7 +597,9 @@ function newPanel() {
                 _playing = setInterval(function() {
                     var prev = _currentIndex;
                     jump('next');
-                    if ( prev === _currentIndex && !settings.loop ) { clearInterval(_playing); }
+                    if (prev === _currentIndex && !settings.loop) {
+                        clearInterval(_playing);
+                    }
                 }, settings.autoplay);
 
                 return self;
@@ -585,7 +607,9 @@ function newPanel() {
 
             function pause() {
                 clearInterval(_playing);
-                if ( settings.autoplay ) { _playing = -1; }
+                if (settings.autoplay) {
+                    _playing = -1;
+                }
 
                 return self;
             }
@@ -604,23 +628,27 @@ function newPanel() {
 
                 _items = _container.find(settings.itemSelector);
 
-                if ( _items.length <= 1 ) { return; }
+                if (_items.length <= 1) {
+                    return;
+                }
 
                 _items
                     .addClass(classes.item)
                     // Wrap inner content
                     .each(function() {
                         var item = $(this);
-                        if ( !item.children('.' + classes.itemContent ).length) {
+                        if (!item.children('.' + classes.itemContent).length) {
                             item.wrapInner('<div class="' + classes.itemContent + '" />');
                         }
                     });
 
                 // Navigate directly to an item by clicking
-                if ( settings.click ) {
+                if (settings.click) {
                     _items.on('click.flipster touchend.flipster', function(e) {
-                        if ( !_startDrag ) {
-                            if ( !$(this).hasClass(classes.itemCurrent) ) { e.preventDefault(); }
+                        if (!_startDrag) {
+                            if (!$(this).hasClass(classes.itemCurrent)) {
+                                e.preventDefault();
+                            }
                             jump(this);
                         }
                     });
@@ -630,18 +658,20 @@ function newPanel() {
                 buildButtons();
                 buildNav();
 
-                if ( _currentIndex >= 0 ) { jump(_currentIndex); }
+                if (_currentIndex >= 0) {
+                    jump(_currentIndex);
+                }
 
                 return self;
             }
 
             function keyboardEvents(elem) {
-                if ( settings.keyboard ) {
+                if (settings.keyboard) {
                     elem[0].tabIndex = 0;
                     elem.on('keydown.flipster', throttle(function(e) {
                         var code = e.which;
-                        if ( code === 37 || code === 39 ) {
-                            jump( code === 37 ? 'prev' : 'next' );
+                        if (code === 37 || code === 39) {
+                            jump(code === 37 ? 'prev' : 'next');
                             e.preventDefault();
                         }
                     }, 250, true));
@@ -649,7 +679,7 @@ function newPanel() {
             }
 
             function wheelEvents(elem) {
-                if ( settings.scrollwheel ) {
+                if (settings.scrollwheel) {
                     var _wheelInside = false,
                         _actionThrottle = 0,
                         _throttleTimeout = 0,
@@ -657,7 +687,9 @@ function newPanel() {
                         _dir, _lastDir;
 
                     elem
-                        .on('mousewheel.flipster wheel.flipster', function() { _wheelInside = true; })
+                        .on('mousewheel.flipster wheel.flipster', function() {
+                            _wheelInside = true;
+                        })
                         .on('mousewheel.flipster wheel.flipster', throttle(function(e) {
 
                             // Reset after a period without scrolling.
@@ -673,18 +705,24 @@ function newPanel() {
                             _delta += (e.wheelDelta || (e.deltaY + e.deltaX) * -1); // Invert numbers for Firefox
 
                             // Don't trigger unless the scroll is decent speed.
-                            if ( Math.abs(_delta) < 25 ) { return; }
+                            if (Math.abs(_delta) < 25) {
+                                return;
+                            }
 
                             _actionThrottle++;
 
                             _dir = (_delta > 0 ? 'prev' : 'next');
 
                             // Reset throttle if direction changed.
-                            if ( _lastDir !== _dir ) { _actionThrottle = 0; }
+                            if (_lastDir !== _dir) {
+                                _actionThrottle = 0;
+                            }
                             _lastDir = _dir;
 
                             // Regular scroll wheels trigger less events, so they don't need to be throttled. Trackpads trigger many events (inertia), so only trigger jump every three times to slow things down.
-                            if ( _actionThrottle < 6 || _actionThrottle % 3 === 0 ) { jump(_dir); }
+                            if (_actionThrottle < 6 || _actionThrottle % 3 === 0) {
+                                jump(_dir);
+                            }
 
                             _delta = 0;
 
@@ -692,7 +730,7 @@ function newPanel() {
 
                     // Disable mousewheel on window if event began in elem.
                     $window.on('mousewheel.flipster wheel.flipster', function(e) {
-                        if ( _wheelInside ) {
+                        if (_wheelInside) {
                             e.preventDefault();
                             _wheelInside = false;
                         }
@@ -702,7 +740,7 @@ function newPanel() {
 
             function touchEvents(elem) {
 
-                if ( settings.touch ) {
+                if (settings.touch) {
                     var _startDragY = false,
                         _touchJump = throttle(jump, 300),
                         x, y, offsetY, offsetX;
@@ -712,19 +750,16 @@ function newPanel() {
                             e = e.originalEvent;
                             _startDrag = (e.touches ? e.touches[0].clientX : e.clientX);
                             _startDragY = (e.touches ? e.touches[0].clientY : e.clientY);
-                            //e.preventDefault();
                         },
 
                         'touchmove.flipster': throttle(function(e) {
-                            if ( _startDrag !== false ) {
+                            if (_startDrag !== false) {
                                 e = e.originalEvent;
-
                                 x = (e.touches ? e.touches[0].clientX : e.clientX);
                                 y = (e.touches ? e.touches[0].clientY : e.clientY);
                                 offsetY = y - _startDragY;
                                 offsetX = x - _startDrag;
-
-                                if ( Math.abs(offsetY) < 50 && Math.abs(offsetX) >= 10 ) {
+                                if (Math.abs(offsetY) < 100 && Math.abs(offsetX) >= 1) {
                                     _touchJump((offsetX < 0 ? 'next' : 'prev'));
                                     _startDrag = x;
                                     e.preventDefault();
@@ -733,41 +768,43 @@ function newPanel() {
                             }
                         }, 100),
 
-                        'touchend.flipster touchcancel.flipster ': function() { _startDrag = false; }
+                        'touchend.flipster touchcancel.flipster ': function() {
+                            console.log(_startDrag);
+                            _startDrag = false;
+                        }
                     });
                 }
             }
-            
+
 
             var circles = Array.prototype.slice.call(document.querySelectorAll(".carousel_nav_circle"));
-			var lines = Array.prototype.slice.call(document.querySelectorAll(".carousel_indicators line"));
+            var lines = Array.prototype.slice.call(document.querySelectorAll(".carousel_indicators line"));
 
             function circle_fill(current_idx, prev_idx) {
-                if(current_idx!=prev_idx) {
-                    circles[current_idx].classList.remove("circle" + current_idx.toString() +"_nofill");
-                    circles[current_idx].classList.add("circle" + current_idx.toString() +"_fill");
+                if (current_idx != prev_idx) {
+                    circles[current_idx].classList.remove("circle" + current_idx.toString() + "_nofill");
+                    circles[current_idx].classList.add("circle" + current_idx.toString() + "_fill");
                     //circles[prev_idx].classList.add("circle" + prev_idx.toString() +"_nofill");
                     //circles[prev_idx].classList.remove("circle" + prev_idx.toString() +"_fill");
-					if(current_idx>0 && current_idx<6) {
-						circles[current_idx].classList.add("line_fill");
-						circles[current_idx].classList.remove("line_nofill");
-					}
-					if(prev_idx>0 && prev_idx<6) {
-						circles[prev_idx].classList.add("line_nofill");
-						circles[prev_idx].classList.remove("line_fill");
-					}
-					if(current_idx>prev_idx) {
-						for(var x=prev_idx; x<current_idx;x++) {
-							lines[x].classList.add("line_fill");
-							lines[x].classList.remove("line_nofill");
-						}
-					}
-					else {
-						for(var x=current_idx; x<prev_idx;x++) {
-							lines[x].classList.remove("line_fill");
-							lines[x].classList.add("line_nofill");
-						}
-					}
+                    if (current_idx > 0 && current_idx < 6) {
+                        circles[current_idx].classList.add("line_fill");
+                        circles[current_idx].classList.remove("line_nofill");
+                    }
+                    if (prev_idx > 0 && prev_idx < 6) {
+                        circles[prev_idx].classList.add("line_nofill");
+                        circles[prev_idx].classList.remove("line_fill");
+                    }
+                    if (current_idx > prev_idx) {
+                        for (var x = prev_idx; x < current_idx; x++) {
+                            lines[x].classList.add("line_fill");
+                            lines[x].classList.remove("line_nofill");
+                        }
+                    } else {
+                        for (var x = current_idx; x < prev_idx; x++) {
+                            lines[x].classList.remove("line_fill");
+                            lines[x].classList.add("line_nofill");
+                        }
+                    }
                 }
             }
 
@@ -794,22 +831,24 @@ function newPanel() {
                 ].join(' '));
 
                 // Set the starting item
-                if ( settings.start ) {
+                if (settings.start) {
                     // Find the middle item if start = center
-                    _currentIndex = ( settings.start === 'center' ? Math.floor(_items.length / 2) : settings.start );
+                    _currentIndex = (settings.start === 'center' ? Math.floor(_items.length / 2) : settings.start);
                 }
 
                 jump(_currentIndex);
 
                 var images = self.find('img');
 
-                if ( images.length ) {
+                if (images.length) {
                     var imagesLoaded = 0;
 
                     // Resize after all images have loaded.
                     images.on('load', function() {
                         imagesLoaded++;
-                        if ( imagesLoaded >= images.length ) { show(); }
+                        if (imagesLoaded >= images.length) {
+                            show();
+                        }
                     });
 
                     // Fallback to show Flipster while images load in case it takes a while.
@@ -819,15 +858,19 @@ function newPanel() {
                 }
 
                 // Attach event bindings.
-               // $window.on('resize.flipster', throttle(resize, 400));
+                // $window.on('resize.flipster', throttle(resize, 400));
 
-                if ( settings.autoplay ) { play(); }
+                if (settings.autoplay) {
+                    play();
+                }
 
-                if ( settings.pauseOnHover ) {
+                if (settings.pauseOnHover) {
                     _container
                         .on('mouseenter.flipster', pause)
                         .on('mouseleave.flipster', function() {
-                            if ( _playing === -1 ) { play(); }
+                            if (_playing === -1) {
+                                play();
+                            }
                         });
                 }
 
@@ -839,8 +882,12 @@ function newPanel() {
             // public methods
             methods = {
                 jump: jump,
-                next: function() { return jump('next'); },
-                prev: function() { return jump('prev'); },
+                next: function() {
+                    return jump('next');
+                },
+                prev: function() {
+                    return jump('prev');
+                },
                 play: play,
                 pause: pause,
                 index: index
@@ -848,7 +895,9 @@ function newPanel() {
             self.data('methods', methods);
 
             // Initialize if flipster is not already active.
-            if ( !self.hasClass(classes.active)) { init(); }
+            if (!self.hasClass(classes.active)) {
+                init();
+            }
         });
     };
 })(jQuery, window);
@@ -858,13 +907,13 @@ var flipContainer = $('.flipster'),
     flipItem = flipContainer.find('.flip-item');
 
 flipContainer.flipster({
-  itemContainer: flipItemContainer,
-  itemSelector: flipItem,
-  loop: 1,
-  autoplay: false,
-  start: 0,
-  style: 'infinite-carousel',
-  spacing: 0,
-  scrollwheel: false,
-  buttons: true
+    itemContainer: flipItemContainer,
+    itemSelector: flipItem,
+    loop: 1,
+    autoplay: false,
+    start: 0,
+    style: 'infinite-carousel',
+    spacing: 0,
+    scrollwheel: false,
+    buttons: true
 });
