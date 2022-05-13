@@ -724,7 +724,7 @@ function newPanel() {
                                 offsetY = y - _startDragY;
                                 offsetX = x - _startDrag;
 
-                                if ( Math.abs(offsetY) < 100 && Math.abs(offsetX) >= 30 ) {
+                                if ( Math.abs(offsetY) < 50 && Math.abs(offsetX) >= 10 ) {
                                     _touchJump((offsetX < 0 ? 'next' : 'prev'));
                                     _startDrag = x;
                                     e.preventDefault();
